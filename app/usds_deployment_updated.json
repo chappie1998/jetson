@@ -1,0 +1,12 @@
+{
+  "usdsMint": "5jMCx4W5425TPRj23KRng5nbyaZkZiD47yLXDkk5tLAV",
+  "treasuryPDA": "5faaSMxNZcBKpA1ziMGamWqPWJ1hJm3NMFF3vQ83YFkZ",
+  "treasuryBump": 254,
+  "mintAuthorityPDA": "2B8FJWXHuJTMsjDjfzsxvaszTPGRqE8nEUFW112NMuMd",
+  "mintAuthorityBump": 255,
+  "network": "https://api.devnet.solana.com",
+  "deployedAt": "2025-05-02T10:23:49.359Z",
+  "treasuryTokenAccount": "5Zp9heu5YsSE9iDWbu55kX7pVx8Uyru4qxjudKsx1BsM",
+  "configAccount": "29K9NuhZ32uxLETt5Pzk5ukJrhidQwc47VzqKbzTHMFo",
+  "initialized": true
+}

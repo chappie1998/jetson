@@ -1,0 +1,9 @@
+{
+  "usdsMint": "CSeHf2QS3chANwaz69uXNdpiU7M5W4qZaRK8ZUAcKWqH",
+  "treasuryPDA": "5faaSMxNZcBKpA1ziMGamWqPWJ1hJm3NMFF3vQ83YFkZ",
+  "treasuryBump": 254,
+  "mintAuthorityPDA": "2B8FJWXHuJTMsjDjfzsxvaszTPGRqE8nEUFW112NMuMd",
+  "mintAuthorityBump": 255,
+  "network": "https://api.devnet.solana.com",
+  "deployedAt": "2025-05-01T21:01:24.967Z"
+}

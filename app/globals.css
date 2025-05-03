@@ -1,0 +1,68 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+.dark {
+  --foreground-rgb: 255, 255, 255;
+  --background-start-rgb: 17, 24, 39;
+  --background-end-rgb: 17, 24, 39;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+    to bottom,
+    rgb(var(--background-start-rgb)),
+    rgb(var(--background-end-rgb))
+  );
+  min-height: 100vh;
+}
+
+/* Custom styles for wallet adapter */
+.wallet-adapter-button {
+  background-color: #1f2937 !important;
+  color: white !important;
+  border-radius: 0.75rem !important;
+  padding: 0.5rem 1rem !important;
+  font-size: 0.875rem !important;
+  line-height: 1.25rem !important;
+  transition: all 0.2s !important;
+}
+
+.wallet-adapter-button:hover {
+  background-color: #374151 !important;
+}
+
+.wallet-adapter-modal-wrapper {
+  background: #1f2937 !important;
+}
+
+.wallet-adapter-modal-button-close {
+  background: #374151 !important;
+}
+
+.wallet-adapter-modal-list {
+  margin: 0 0 4px !important;
+}
+
+.wallet-adapter-modal-list li:not(:first-of-type) {
+  margin-top: 4px !important;
+}
+
+.wallet-adapter-modal-list li button {
+  border-radius: 0.5rem !important;
+  font-size: 0.875rem !important;
+  font-weight: 500 !important;
+  background-color: #374151 !important;
+  color: white !important;
+}
+
+.wallet-adapter-modal-list li button:hover {
+  background-color: #4b5563 !important;
+} 

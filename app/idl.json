@@ -1,0 +1,352 @@
+{
+  "address": "AqFGP1Fs3nJ3Ue2Nc7RVZ1AUAad5AsEr4VBRJB2mEnk3",
+  "metadata": {
+    "name": "usds_swap",
+    "version": "0.1.0",
+    "spec": "0.1.0",
+    "description": "Created with Anchor"
+  },
+  "instructions": [
+    {
+      "name": "initialize",
+      "discriminator": [
+        175,
+        175,
+        109,
+        31,
+        13,
+        152,
+        155,
+        237
+      ],
+      "accounts": [
+        {
+          "name": "admin",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "config",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "treasury",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  116,
+                  114,
+                  101,
+                  97,
+                  115,
+                  117,
+                  114,
+                  121
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "treasury_token_account",
+          "docs": [
+            "The token account that will hold USDC, owned by the treasury PDA"
+          ]
+        },
+        {
+          "name": "mint_authority",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  109,
+                  105,
+                  110,
+                  116,
+                  45,
+                  97,
+                  117,
+                  116,
+                  104,
+                  111,
+                  114,
+                  105,
+                  116,
+                  121
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "usds_mint"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "swap_usdc_to_usds",
+      "discriminator": [
+        3,
+        47,
+        72,
+        28,
+        13,
+        138,
+        47,
+        210
+      ],
+      "accounts": [
+        {
+          "name": "user",
+          "signer": true
+        },
+        {
+          "name": "config"
+        },
+        {
+          "name": "user_usdc",
+          "writable": true
+        },
+        {
+          "name": "user_usds",
+          "writable": true
+        },
+        {
+          "name": "treasury",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  116,
+                  114,
+                  101,
+                  97,
+                  115,
+                  117,
+                  114,
+                  121
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "treasury_token_account",
+          "writable": true
+        },
+        {
+          "name": "mint_authority",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  109,
+                  105,
+                  110,
+                  116,
+                  45,
+                  97,
+                  117,
+                  116,
+                  104,
+                  111,
+                  114,
+                  105,
+                  116,
+                  121
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "usds_mint",
+          "writable": true
+        },
+        {
+          "name": "token_program",
+          "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        }
+      ],
+      "args": [
+        {
+          "name": "amount",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "swap_usds_to_usdc",
+      "discriminator": [
+        254,
+        45,
+        112,
+        36,
+        49,
+        103,
+        151,
+        48
+      ],
+      "accounts": [
+        {
+          "name": "user",
+          "signer": true
+        },
+        {
+          "name": "config"
+        },
+        {
+          "name": "user_usdc",
+          "writable": true
+        },
+        {
+          "name": "user_usds",
+          "writable": true
+        },
+        {
+          "name": "treasury",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  116,
+                  114,
+                  101,
+                  97,
+                  115,
+                  117,
+                  114,
+                  121
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "treasury_token_account",
+          "writable": true
+        },
+        {
+          "name": "usds_mint",
+          "writable": true
+        },
+        {
+          "name": "token_program",
+          "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        }
+      ],
+      "args": [
+        {
+          "name": "amount",
+          "type": "u64"
+        }
+      ]
+    }
+  ],
+  "accounts": [
+    {
+      "name": "Config",
+      "discriminator": [
+        155,
+        12,
+        170,
+        224,
+        30,
+        250,
+        204,
+        130
+      ]
+    }
+  ],
+  "events": [
+    {
+      "name": "SwapEvent",
+      "discriminator": [
+        64,
+        198,
+        205,
+        232,
+        38,
+        8,
+        113,
+        226
+      ]
+    }
+  ],
+  "types": [
+    {
+      "name": "Config",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "treasury_bump",
+            "type": "u8"
+          },
+          {
+            "name": "mint_authority_bump",
+            "type": "u8"
+          },
+          {
+            "name": "usds_mint",
+            "type": "pubkey"
+          },
+          {
+            "name": "treasury_token_account",
+            "type": "pubkey"
+          }
+        ]
+      }
+    },
+    {
+      "name": "SwapDirection",
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "UsdcToUsds"
+          },
+          {
+            "name": "UsdsToUsdc"
+          }
+        ]
+      }
+    },
+    {
+      "name": "SwapEvent",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "user",
+            "type": "pubkey"
+          },
+          {
+            "name": "amount",
+            "type": "u64"
+          },
+          {
+            "name": "swap_direction",
+            "type": {
+              "defined": {
+                "name": "SwapDirection"
+              }
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
