@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import {
   LineChart, Line, AreaChart, Area, BarChart, Bar,
   XAxis, YAxis, CartesianGrid, Tooltip, Legend,
@@ -161,86 +161,186 @@ export const InteractiveBarChart = ({
 };
 
 // Combined chart component with bars and line
-export const CombinedBarLineChart = ({
+export const CombinedBarLineChart: React.FC<{
+  data: any;
+  barDataKey: any;
+  lineDataKey?: any;
+  xAxisKey?: string;
+  barName: any;
+  lineName: any;
+  height?: number;
+  valuePrefix?: string;
+  valueSuffix?: string;
+  xAxisFormatter?: (value: any) => string;
+  yAxisFormatter?: (value: any) => string;
+  colorByValue?: boolean;
+  positiveColor?: string;
+  negativeColor?: string;
+  barColors?: string[];
+  lineColor?: string;
+}> = ({
   data,
   barDataKey,
-  lineDataKey = barDataKey,
-  xAxisKey = 'date',
+  lineDataKey,
+  xAxisKey = "date",
   barName,
   lineName,
   height = 300,
-  valuePrefix = '',
-  valueSuffix = '',
-  yAxisFormatter = value => value.toLocaleString(),
-  xAxisFormatter = value => {
-    if (typeof value === 'string' && value.includes('-')) {
-      const date = new Date(value);
-      return `${date.getMonth()+1}/${date.getDate()}`;
-    }
-    return value;
-  },
-  barColorByValue = true,
+  valuePrefix = "",
+  valueSuffix = "",
+  xAxisFormatter,
+  yAxisFormatter,
+  colorByValue = false,
   positiveColor = "#4ade80",
   negativeColor = "#f87171",
-  lineColor = "#38bdf8"
+  barColors,
+  lineColor = "#60a5fa"
 }) => {
-  // Custom dot renderer to only show significant values
-  const renderDot = (props) => {
-    const { cx, cy, value } = props;
-    // Only render dots for significant values (e.g., big gains or losses)
-    if (Math.abs(value) > 5) {
-      return (
-        <circle 
-          cx={cx} 
-          cy={cy} 
-          r={4} 
-          fill={value >= 0 ? positiveColor : negativeColor} 
-          stroke="none" 
-        />
-      );
+  const [brushActive, setBrushActive] = useState(false);
+  const [activeDot, setActiveDot] = useState<number | null>(null);
+  
+  // Define the custom bar color function
+  const getBarColor = (entry: any) => {
+    if (barColors && Array.isArray(barColors) && barColors.length > 0) {
+      // If we have an array of colors, use them based on value
+      if (colorByValue) {
+        const value = entry[barDataKey];
+        return value >= 0 ? barColors[0] : barColors.length > 1 ? barColors[1] : barColors[0];
+      } else {
+        // Use first color if not by value
+        return barColors[0];
+      }
+    } else if (colorByValue) {
+      // Default color by value behavior
+      const value = entry[barDataKey];
+      return value >= 0 ? positiveColor : negativeColor;
+    } else {
+      // Default color
+      return positiveColor;
     }
-    return null;
   };
-
+  
+  // Generate moving average for line if lineDataKey not specified
+  const chartData = useMemo(() => {
+    if (lineDataKey || !data || data.length === 0) return data;
+    
+    const windowSize = Math.max(5, Math.floor(data.length / 20));
+    let sum = 0;
+    const result = [...data].map((item, index, array) => {
+      if (index < windowSize) {
+        // For the first windowSize items, use cumulative average
+        sum += item[barDataKey] || 0;
+        return {
+          ...item,
+          trend: sum / (index + 1)
+        };
+      } else {
+        // For the rest, use moving average
+        let windowSum = 0;
+        for (let i = 0; i < windowSize; i++) {
+          windowSum += array[index - i][barDataKey] || 0;
+        }
+        return {
+          ...item,
+          trend: windowSum / windowSize
+        };
+      }
+    });
+    
+    return result;
+  }, [data, barDataKey, lineDataKey]);
+  
+  if (!chartData || chartData.length === 0) {
+    return <div className="flex items-center justify-center h-64 bg-gray-800 rounded-lg">
+      <p className="text-gray-400">No data available</p>
+    </div>;
+  }
+  
   return (
-    <div style={{ height: `${height}px`, width: '100%' }}>
-      <ResponsiveContainer width="100%" height="100%">
-        <ComposedChart
-          data={data}
-          margin={{ top: 5, right: 5, left: 5, bottom: 5 }}
-        >
-          <CartesianGrid strokeDasharray="3 3" stroke="#444" />
-          <XAxis 
-            dataKey={xAxisKey} 
-            tick={{ fill: '#9ca3af' }}
-            tickFormatter={xAxisFormatter}
-          />
-          <YAxis 
-            tick={{ fill: '#9ca3af' }}
-            tickFormatter={yAxisFormatter}
-          />
-          <Tooltip 
-            content={<CustomTooltip valuePrefix={valuePrefix} valueSuffix={valueSuffix} />}
-          />
-          <ReferenceLine y={0} stroke="#666" />
-          <Bar
-            dataKey={barDataKey}
-            name={barName || barDataKey}
-            fill={barColorByValue ? 
-              ((data) => data[barDataKey] >= 0 ? positiveColor : negativeColor) : 
-              positiveColor}
-          />
-          <Line
-            type="monotone"
-            dataKey={lineDataKey}
-            name={lineName || lineDataKey}
-            stroke={lineColor}
-            dot={renderDot}
-            strokeWidth={1}
-          />
-        </ComposedChart>
-      </ResponsiveContainer>
-    </div>
+    <ResponsiveContainer width="100%" height={height}>
+      <ComposedChart
+        data={chartData}
+        margin={{ top: 5, right: 20, bottom: 20, left: 20 }}
+        onMouseMove={(e) => {
+          if (e.activeTooltipIndex !== undefined) {
+            setActiveDot(e.activeTooltipIndex);
+          }
+        }}
+        onMouseLeave={() => setActiveDot(null)}
+      >
+        <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
+        <XAxis 
+          dataKey={xAxisKey} 
+          tick={{ fill: '#9CA3AF' }}
+          tickFormatter={xAxisFormatter}
+        />
+        <YAxis 
+          tick={{ fill: '#9CA3AF' }} 
+          tickFormatter={yAxisFormatter}
+        />
+        <Tooltip
+          content={({ active, payload }) => {
+            if (active && payload && payload.length) {
+              return (
+                <div className="bg-gray-800 border border-gray-700 rounded-lg shadow-lg p-3">
+                  <p className="text-gray-300 mb-1">
+                    {payload[0].payload[xAxisKey] && (xAxisFormatter 
+                      ? xAxisFormatter(payload[0].payload[xAxisKey]) 
+                      : payload[0].payload[xAxisKey])}
+                  </p>
+                  <p className="font-semibold text-sm">
+                    <span className="text-green-400">{barName}: </span>
+                    <span className="text-white">
+                      {valuePrefix}{yAxisFormatter 
+                        ? yAxisFormatter(payload[0].value) 
+                        : payload[0].value
+                      }{valueSuffix}
+                    </span>
+                  </p>
+                  {payload.length > 1 && (
+                    <p className="font-semibold text-sm">
+                      <span className="text-blue-400">{lineName}: </span>
+                      <span className="text-white">
+                        {valuePrefix}{yAxisFormatter 
+                          ? yAxisFormatter(payload[1].value) 
+                          : payload[1].value
+                        }{valueSuffix}
+                      </span>
+                    </p>
+                  )}
+                </div>
+              );
+            }
+            return null;
+          }}
+        />
+        <Legend 
+          verticalAlign="top" 
+          height={36} 
+          payload={[
+            { value: barName, type: 'rect', color: colorByValue ? (barColors ? barColors[0] : positiveColor) : (barColors ? barColors[0] : positiveColor) },
+            { value: lineName, type: 'line', color: lineColor }
+          ]}
+        />
+        <Bar 
+          dataKey={barDataKey} 
+          name={barName}
+          fill={positiveColor}
+          radius={[2, 2, 0, 0]}
+          // Replace static fill with dynamic color function
+          fill={(entry) => getBarColor(entry)}
+        />
+        <Line 
+          type="monotone" 
+          dataKey={lineDataKey || "trend"} 
+          name={lineName}
+          stroke={lineColor} 
+          strokeWidth={2}
+          dot={false}
+          activeDot={{ r: 6, fill: lineColor, stroke: "#111827", strokeWidth: 2 }}
+        />
+      </ComposedChart>
+    </ResponsiveContainer>
   );
 };
 

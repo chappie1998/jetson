@@ -10,11 +10,11 @@ export default function HomePage() {
       <section className="py-20 px-6 max-w-7xl mx-auto">
         <div className="text-center mb-12">
           <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-indigo-600">
-            Maximize Your USDC Yield
+            AI-Powered Yield Optimization
           </h1>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            Jetson is a yield platform where users can swap USDC with synthetic 
-            token USDS, leveraging delta neutral strategies to generate stable returns.
+            Jetson is a next-generation yield platform that supercharges your USDC returns 
+            with AI-enhanced delta-neutral strategies, outperforming traditional yield solutions.
           </p>
           <div className="mt-10 flex flex-col md:flex-row items-center justify-center gap-6">
             <Link 
@@ -22,6 +22,12 @@ export default function HomePage() {
               className="rounded-lg px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium text-lg w-full md:w-auto text-center"
             >
               Swap Tokens
+            </Link>
+            <Link 
+              href="/how-it-works" 
+              className="rounded-lg px-6 py-3 bg-gray-700 hover:bg-gray-600 text-white font-medium text-lg w-full md:w-auto text-center"
+            >
+              Learn How It Works
             </Link>
             <Link 
               href="/delta-neutral" 
@@ -35,16 +41,16 @@ export default function HomePage() {
         {/* Stats */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
           <div className="bg-gray-800 rounded-xl p-6 text-center">
-            <div className="text-4xl font-bold text-blue-400 mb-2">8-12%</div>
-            <p className="text-gray-400">Average Annual Yield</p>
+            <div className="text-4xl font-bold text-blue-400 mb-2">20-30%</div>
+            <p className="text-gray-400">AI-Enhanced Annual Yield</p>
           </div>
           <div className="bg-gray-800 rounded-xl p-6 text-center">
             <div className="text-4xl font-bold text-blue-400 mb-2">$2.5M+</div>
             <p className="text-gray-400">Total Value Locked</p>
           </div>
           <div className="bg-gray-800 rounded-xl p-6 text-center">
-            <div className="text-4xl font-bold text-blue-400 mb-2">99.9%</div>
-            <p className="text-gray-400">Uptime Performance</p>
+            <div className="text-4xl font-bold text-blue-400 mb-2">3X</div>
+            <p className="text-gray-400">Outperforming Competitors</p>
           </div>
         </div>
       </section>
@@ -57,24 +63,63 @@ export default function HomePage() {
             <div className="text-blue-500 text-3xl font-bold mb-4">01</div>
             <h3 className="text-xl font-semibold mb-3">Swap USDC for USDS</h3>
             <p className="text-gray-400">
-              Exchange your USDC stablecoins for synthetic USDS tokens at a 1:1 ratio. 
-              Your USDC enters our yield-generating treasury.
+              Exchange your USDC for our synthetic USDS tokens at a 1:1 ratio.
+              Your capital enters our AI-powered yield generation engine.
             </p>
           </div>
           <div className="bg-gray-800/50 rounded-xl p-6">
             <div className="text-blue-500 text-3xl font-bold mb-4">02</div>
-            <h3 className="text-xl font-semibold mb-3">Delta Neutral Strategies</h3>
+            <h3 className="text-xl font-semibold mb-3">AI Strategy Optimization</h3>
             <p className="text-gray-400">
-              Your USDC is allocated to multiple delta-neutral strategies that 
-              minimize market exposure while maximizing yield.
+              Our proprietary AI models continuously analyze market conditions to 
+              dynamically allocate capital across optimized delta-neutral strategies.
             </p>
           </div>
           <div className="bg-gray-800/50 rounded-xl p-6">
             <div className="text-blue-500 text-3xl font-bold mb-4">03</div>
-            <h3 className="text-xl font-semibold mb-3">Earn Yield</h3>
+            <h3 className="text-xl font-semibold mb-3">Enhanced Returns</h3>
             <p className="text-gray-400">
-              USDS holders earn yield through a combination of liquid staking, 
-              lending markets, and hedged liquidity positions.
+              USDS holders earn industry-leading yields through AI-optimized funding rate arbitrage,
+              perpetual futures strategies, and predictive market positioning.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Advantage Section */}
+      <section className="py-16 px-6 max-w-7xl mx-auto bg-gray-800/30 rounded-3xl">
+        <h2 className="text-3xl font-bold text-center mb-6">The Jetson Advantage</h2>
+        <p className="text-center text-gray-300 max-w-3xl mx-auto mb-12">
+          While platforms like Ethena offer basic delta-neutral strategies with 8-10% yields,
+          Jetson leverages advanced AI and machine learning to deliver significantly higher returns.
+        </p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="bg-gray-800 rounded-xl p-6 border-l-4 border-blue-500">
+            <h3 className="text-xl font-semibold mb-3">Predictive Market Intelligence</h3>
+            <p className="text-gray-400">
+              Our AI system analyzes terabytes of market data to predict funding rate trends and
+              optimal entry/exit points, maximizing yield while maintaining delta neutrality.
+            </p>
+          </div>
+          <div className="bg-gray-800 rounded-xl p-6 border-l-4 border-purple-500">
+            <h3 className="text-xl font-semibold mb-3">Multi-Chain Optimization</h3>
+            <p className="text-gray-400">
+              Unlike single-chain solutions, Jetson automatically allocates capital across
+              multiple blockchains to capture the highest yields and arbitrage opportunities.
+            </p>
+          </div>
+          <div className="bg-gray-800 rounded-xl p-6 border-l-4 border-indigo-500">
+            <h3 className="text-xl font-semibold mb-3">Real-time Strategy Adaptation</h3>
+            <p className="text-gray-400">
+              Our strategies continuously adapt to market conditions, optimizing for 
+              maximum returns while dynamically adjusting risk parameters.
+            </p>
+          </div>
+          <div className="bg-gray-800 rounded-xl p-6 border-l-4 border-green-500">
+            <h3 className="text-xl font-semibold mb-3">Backtested Performance</h3>
+            <p className="text-gray-400">
+              Our strategies have been rigorously backtested across multiple market cycles,
+              demonstrating consistent outperformance over traditional yield platforms.
             </p>
           </div>
         </div>
@@ -82,39 +127,39 @@ export default function HomePage() {
 
       {/* Strategy Types */}
       <section className="py-16 px-6 max-w-7xl mx-auto">
-        <h2 className="text-3xl font-bold text-center mb-12">Our Delta Neutral Strategies</h2>
+        <h2 className="text-3xl font-bold text-center mb-12">Our AI-Enhanced Strategies</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="bg-gray-800 rounded-xl p-6 border-t-4 border-blue-500">
-            <h3 className="text-xl font-semibold mb-3">Liquid Staking</h3>
+            <h3 className="text-xl font-semibold mb-3">Perpetual Funding Rate Arbitrage</h3>
             <p className="text-gray-400 mb-4">
-              Stake crypto assets while hedging against price exposure using futures contracts. 
-              This strategy captures staking rewards while neutralizing market risk.
+              Our AI predicts optimal funding rate cycles across exchanges, leveraging
+              delta-neutral positions to capture funding without directional exposure.
             </p>
-            <div className="text-blue-400 font-semibold">5-8% Annual Yield</div>
+            <div className="text-blue-400 font-semibold">15-25% Annual Yield</div>
           </div>
           <div className="bg-gray-800 rounded-xl p-6 border-t-4 border-purple-500">
-            <h3 className="text-xl font-semibold mb-3">Lending Markets</h3>
+            <h3 className="text-xl font-semibold mb-3">Dynamic Basis Trading</h3>
             <p className="text-gray-400 mb-4">
-              Deploy capital in lending protocols while hedging borrowed assets. 
-              This leverages interest rate differentials for optimal yield.
+              Exploit futures basis spreads with AI-timed entries and exits,
+              maximizing returns while maintaining perfect hedge ratios.
             </p>
-            <div className="text-blue-400 font-semibold">8-12% Annual Yield</div>
+            <div className="text-blue-400 font-semibold">18-30% Annual Yield</div>
           </div>
           <div className="bg-gray-800 rounded-xl p-6 border-t-4 border-indigo-500">
-            <h3 className="text-xl font-semibold mb-3">Liquidity Provision</h3>
+            <h3 className="text-xl font-semibold mb-3">Volatility Harvesting</h3>
             <p className="text-gray-400 mb-4">
-              Provide liquidity to DEXs while hedging against impermanent loss. 
-              Earn trading fees and incentives with minimized downside.
+              Our AI identifies optimal volatility conditions to deploy specialized
+              options-based strategies that capture premium while remaining delta-neutral.
             </p>
-            <div className="text-blue-400 font-semibold">10-15% Annual Yield</div>
+            <div className="text-blue-400 font-semibold">20-40% Annual Yield</div>
           </div>
         </div>
         <div className="text-center mt-10">
           <Link 
-            href="/delta-neutral" 
+            href="/strategy-backtest" 
             className="inline-block rounded-lg px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium"
           >
-            Explore Strategies
+            Explore Strategy Performance
           </Link>
         </div>
       </section>
@@ -127,8 +172,8 @@ export default function HomePage() {
               <span className="text-white font-bold text-2xl">Jetson</span>
             </div>
             <p className="text-gray-400 max-w-lg mx-auto mb-8">
-              A cutting-edge yield platform that lets you earn through delta-neutral 
-              strategies while maintaining the stability of a stablecoin.
+              The next evolution in DeFi yield generation, delivering AI-enhanced returns
+              through sophisticated delta-neutral strategies and predictive market intelligence.
             </p>
             <div className="flex justify-center space-x-6">
               <a href="#" className="text-gray-400 hover:text-white">

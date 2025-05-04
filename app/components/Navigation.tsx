@@ -23,6 +23,7 @@ export function Navigation() {
           
           <div className="hidden md:flex ml-10 space-x-6">
             <NavLink href="/swap" active={isActive('/swap')}>Swap</NavLink>
+            <NavLink href="/how-it-works" active={isActive('/how-it-works')}>How It Works</NavLink>
             <NavLink href="/delta-neutral" active={isActive('/delta-neutral')}>Yield Strategies</NavLink>
             <NavLink href="/funding-strategy" active={isActive('/funding-strategy')}>Funding Rate</NavLink>
             <NavLink href="/advanced-strategies" active={isActive('/advanced-strategies')}>Advanced Strategies</NavLink>
@@ -38,6 +39,7 @@ export function Navigation() {
       {/* Mobile menu (shown only on small screens) */}
       <div className="md:hidden mt-4 flex space-x-4">
         <NavLink href="/swap" active={isActive('/swap')}>Swap</NavLink>
+        <NavLink href="/how-it-works" active={isActive('/how-it-works')}>How It Works</NavLink>
         <NavLink href="/delta-neutral" active={isActive('/delta-neutral')}>Yield</NavLink>
         <NavLink href="/funding-strategy" active={isActive('/funding-strategy')}>Funding</NavLink>
         <NavLink href="/advanced-strategies" active={isActive('/advanced-strategies')}>Advanced</NavLink>
