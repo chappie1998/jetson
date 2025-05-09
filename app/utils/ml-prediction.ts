@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { FundingRateData, HistoricalDataPoint } from './types';
+import { FundingRateData } from './types';
 
 // Configuration for ML services
 interface MLServiceConfig {
