@@ -8,11 +8,29 @@ This project consists of:
 
 1. A Solana program (smart contract) built with Anchor framework
 2. A Next.js web interface for interacting with the contract
+3. Advanced off-chain delta-neutral strategies for yield generation
 
 The program provides functionality to:
 - Initialize the program with the necessary configuration
 - Swap USDC to USDS (1:1)
 - Swap USDS to USDC (1:1)
+- Generate yield through off-chain delta-neutral strategies
+
+## Advanced Delta-Neutral Strategy Implementation
+
+The platform features a comprehensive off-chain strategy management system that implements delta-neutral yield strategies:
+
+- **Basis Trading**: Exploiting price differences between CEX and DEX venues
+- **Funding Rate Harvesting**: Capturing funding payments from perpetual futures markets
+- **Multi-Protocol Strategy**: Diversified approach across multiple platforms
+
+Key improvements over similar platforms like Ethena:
+
+1. **Advanced Risk Management**: Real-time monitoring of exposure, leverage, and collateralization
+2. **Multi-Source Price Oracle**: Using median prices from multiple sources for reliability
+3. **Dynamic Portfolio Rebalancing**: Adjusting positions based on market conditions and strategy parameters
+4. **Performance Analytics**: Tracking metrics like Sharpe ratio, volatility, and drawdowns
+5. **Strategy Diversification**: Spreading capital across multiple strategies to reduce risk
 
 ## Configuration
 
@@ -71,6 +89,7 @@ anchor test
 3. Enter the amount you want to swap
 4. Choose the direction (USDC to USDS or USDS to USDC)
 5. Complete the transaction
+6. Access the Delta-Neutral and Advanced Strategies pages to manage yield strategies
 
 ## Project Structure
 
@@ -80,6 +99,8 @@ anchor test
   - `config.ts` - Application configuration
   - `hooks/` - Custom React hooks
   - `utils/` - Utility functions for Solana operations
+  - `delta-neutral/` - Basic delta-neutral strategy UI
+  - `advanced-strategies/` - Enhanced strategy management interface
 - `tests/` - Program tests
 
 ## License

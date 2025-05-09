@@ -31,3 +31,39 @@ export const DEPLOYMENT_INFO = {
   configAccount: '29K9NuhZ32uxLETt5Pzk5ukJrhidQwc47VzqKbzTHMFo',
   treasuryTokenAccount: '5Zp9heu5YsSE9iDWbu55kX7pVx8Uyru4qxjudKsx1BsM',
 }; 
+
+// Delta Neutral Strategy Constants
+export const STRATEGY_SEEDS = {
+  STRATEGY: 'strategy',
+  TREASURY_STATS: 'treasury-stats'
+};
+
+export const STRATEGY_TYPE_NAMES = {
+  0: 'Liquid Staking',
+  1: 'Lending',
+  2: 'Liquidity Provision'
+};
+
+export const STRATEGY_DEFAULT_PARAMETERS = {
+  liquidStaking: {
+    minAllocation: 1000, // 1000 USDC
+    maxAllocation: 500000, // 500K USDC
+    targetHedgeRatio: 100, // 100% hedged
+    rebalanceThreshold: 5, // 5% deviation triggers rebalance
+    rebalanceInterval: 86400, // Once a day in seconds
+  },
+  lending: {
+    minAllocation: 5000, // 5000 USDC
+    maxAllocation: 1000000, // 1M USDC
+    targetHedgeRatio: 100, // 100% hedged
+    rebalanceThreshold: 3, // 3% deviation triggers rebalance
+    rebalanceInterval: 43200, // Twice a day in seconds
+  },
+  liquidityProvision: {
+    minAllocation: 10000, // 10K USDC
+    maxAllocation: 2000000, // 2M USDC
+    targetHedgeRatio: 90, // 90% hedged (allowing some IL exposure)
+    rebalanceThreshold: 2, // 2% deviation triggers rebalance
+    rebalanceInterval: 21600, // 4 times a day in seconds
+  }
+}; 

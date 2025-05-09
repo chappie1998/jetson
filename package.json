@@ -9,25 +9,31 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@project-serum/anchor": "^0.26.0",
+    "@solana/spl-token": "^0.3.9",
     "@solana/wallet-adapter-base": "^0.9.23",
     "@solana/wallet-adapter-react": "^0.15.35",
     "@solana/wallet-adapter-react-ui": "^0.9.34",
     "@solana/wallet-adapter-wallets": "^0.19.15",
     "@solana/web3.js": "^1.87.6",
-    "@solana/spl-token": "^0.3.9",
+    "autoprefixer": "^10.4.16",
+    "axios": "^1.6.2",
+    "bn.js": "^5.2.1",
     "next": "13.4.19",
+    "postcss": "^8.4.31",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "tailwindcss": "^3.3.3",
-    "postcss": "^8.4.31",
-    "autoprefixer": "^10.4.16"
+    "recharts": "^2.15.3",
+    "tailwindcss": "^3.3.3"
   },
   "devDependencies": {
+    "@types/bn.js": "^5.1.1",
     "@types/node": "20.5.9",
     "@types/react": "18.2.21",
     "@types/react-dom": "18.2.7",
-    "typescript": "5.2.2",
     "eslint": "8.48.0",
-    "eslint-config-next": "13.4.19"
-  }
+    "eslint-config-next": "13.4.19",
+    "typescript": "5.2.2"
+  },
+  "packageManager": "yarn@4.5.1+sha512.341db9396b6e289fecc30cd7ab3af65060e05ebff4b3b47547b278b9e67b08f485ecd8c79006b405446262142c7a38154445ef7f17c1d5d1de7d90bf9ce7054d"
 }

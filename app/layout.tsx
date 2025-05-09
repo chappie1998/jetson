@@ -2,12 +2,13 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import { Providers } from './providers';
+import { Navigation } from './components/Navigation';
 
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'USDS Swap',
-  description: 'Swap between USDC and USDS tokens on Solana',
+  title: 'Jetson - USDS Platform',
+  description: 'The yield platform for exchanging USDC with synthetic token USDS',
 };
 
 export default function RootLayout({
@@ -17,9 +18,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="dark">
-      <body className={`${inter.className} antialiased`}>
+      <body className={`${inter.className} antialiased bg-gray-900 min-h-screen`}>
         <Providers>
-          {children}
+          <Navigation />
+          <main>
+            {children}
+          </main>
         </Providers>
       </body>
     </html>
