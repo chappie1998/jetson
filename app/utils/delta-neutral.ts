@@ -2,7 +2,7 @@
 import { Connection, Keypair, PublicKey, Transaction, sendAndConfirmTransaction } from '@solana/web3.js';
 import { Program, AnchorProvider, Wallet, BN } from '@project-serum/anchor';
 import { getAssociatedTokenAddress } from '@solana/spl-token';
-import * as idl from '../../target/idl/usds_swap.json';
+// import * as idl from '../../target/idl/usds_swap.json';
 import { 
   PROGRAM_ID, 
   USDC_MINT, 
