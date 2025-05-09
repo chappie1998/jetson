@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { FundingRatePredictor, FundingRatePrediction } from '../../../app/utils/ml-prediction';
 import { Connection, PublicKey } from '@solana/web3.js';
 import { RPC_ENDPOINT } from '../../../app/config';

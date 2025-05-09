@@ -8,7 +8,131 @@ import {
   InteractiveAreaChart, 
   InteractiveBarChart 
 } from '../components/InteractiveCharts';
-import { AIEnhancedSolaDNManager } from '../../lib/soladn-integration/ai-middleware';
+
+// Mock implementation for SolaDN Manager to avoid external dependencies
+class MockSolaDNManager {
+  private apiKey: string;
+  private poolAddress: string;
+
+  constructor(apiKey: string, poolAddress: string) {
+    this.apiKey = apiKey;
+    this.poolAddress = poolAddress;
+  }
+
+  async getPoolState() {
+    return {
+      totalValueLocked: 2500000, // $2.5M
+      currentAllocations: [
+        { asset: 'SOL', size: 750000, direction: 'short' },
+        { asset: 'ETH', size: 750000, direction: 'short' },
+        { asset: 'BTC', size: 750000, direction: 'long' },
+      ],
+      currentRates: [
+        { 
+          asset: 'SOL', 
+          exchange: 'Binance', 
+          rate: 0.0008, 
+          annualizedRate: 0.0008 * 3 * 365,
+          nextPaymentTimestamp: Date.now() + 4 * 60 * 60 * 1000,
+        },
+        { 
+          asset: 'ETH', 
+          exchange: 'Binance', 
+          rate: 0.0005, 
+          annualizedRate: 0.0005 * 3 * 365,
+          nextPaymentTimestamp: Date.now() + 4 * 60 * 60 * 1000,
+        },
+        { 
+          asset: 'BTC', 
+          exchange: 'Binance', 
+          rate: -0.0003, 
+          annualizedRate: -0.0003 * 3 * 365,
+          nextPaymentTimestamp: Date.now() + 4 * 60 * 60 * 1000,
+        },
+      ],
+      insuranceFundSize: 125000, // $125K (5% of TVL)
+      performanceMetrics: {
+        daily: 0.0005 * 3, // 0.15% daily (3 funding periods)
+        weekly: 0.0005 * 3 * 7, // ~1.05% weekly
+        monthly: 0.0005 * 3 * 30, // ~4.5% monthly
+        annualized: 0.0005 * 3 * 365, // ~54.75% annualized
+      }
+    };
+  }
+
+  async optimizeAllocations() {
+    return [
+      {
+        asset: 'SOL',
+        exchange: 'Binance',
+        size: 625000,
+        direction: 'short',
+        leverage: 2.5,
+        targetFundingRate: 0.0008,
+        expectedReturn: 0.42,
+        confidence: 0.85,
+      },
+      {
+        asset: 'ETH',
+        exchange: 'Binance',
+        size: 500000,
+        direction: 'short',
+        leverage: 2.0,
+        targetFundingRate: 0.0005,
+        expectedReturn: 0.35,
+        confidence: 0.78,
+      },
+      {
+        asset: 'BTC',
+        exchange: 'Binance',
+        size: 475000,
+        direction: 'long',
+        leverage: 1.5,
+        targetFundingRate: -0.0003,
+        expectedReturn: 0.28,
+        confidence: 0.72,
+      }
+    ];
+  }
+
+  async getHistoricalPerformance(days: number = 30) {
+    const data: { date: string; dailyReturn: number; cumulativeReturn: number }[] = [];
+    const now = Date.now();
+    const dayMs = 24 * 60 * 60 * 1000;
+    
+    let cumulativeReturn = 1;
+    
+    for (let i = days; i >= 0; i--) {
+      const timestamp = now - (i * dayMs);
+      const dailyReturn = 0.0015 + (Math.random() * 0.002 - 0.001); // 0.05% to 0.25% daily
+      cumulativeReturn *= (1 + dailyReturn);
+      
+      data.push({
+        date: new Date(timestamp).toISOString().split('T')[0],
+        dailyReturn: dailyReturn,
+        cumulativeReturn: cumulativeReturn - 1, // Convert to percentage return
+      });
+    }
+    
+    return data;
+  }
+
+  async getRiskMetrics() {
+    return {
+      sharpeRatio: 2.5,
+      sortinoRatio: 3.2,
+      maxDrawdown: 0.05, // 5%
+      volatility: 0.03, // 3% daily volatility
+      exposureByAsset: {
+        SOL: 0.2, // 20% of portfolio
+        ETH: 0.3,
+        BTC: 0.3,
+        // Rest is in insurance fund or reserves
+      },
+      deltaExposure: 0.02, // 2% net market exposure (near delta-neutral)
+    };
+  }
+}
 
 // Temporary mock API key for demo
 const DEMO_API_KEY = 'demo-api-key';
@@ -30,7 +154,7 @@ export default function SolaDNPoolPage() {
     setIsLoading(true);
     
     try {
-      const manager = new AIEnhancedSolaDNManager(
+      const manager = new MockSolaDNManager(
         DEMO_API_KEY,
         DEMO_POOL_ADDRESS
       );

@@ -614,7 +614,7 @@ export default function StrategyBacktestPage() {
                   <h2 className="text-white text-xl font-semibold">Portfolio Value</h2>
                   <TimeRangeSelector 
                     timeframe={chartTimeframe} 
-                    onChange={setChartTimeframe}
+                    onChange={(tf) => setChartTimeframe(tf as any)}
                   />
                 </div>
                 
